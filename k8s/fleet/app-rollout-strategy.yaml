@@ -1,0 +1,23 @@
+apiVersion: placement.kubernetes-fleet.io/v1beta1
+kind: ClusterStagedUpdateStrategy
+metadata:
+  name: guestbook-rollout
+spec:
+  stages:
+    - name: staging
+      labelSelector:
+        matchLabels:
+          fleet.azure.com/group: staging
+      afterStageTasks:
+        - type: TimedWait
+          waitTime: 2m
+    - name: canary
+      labelSelector:
+        matchLabels:
+          fleet.azure.com/group: canary
+      afterStageTasks:
+        - type: Approval
+    - name: production
+      labelSelector:
+        matchLabels:
+          fleet.azure.com/group: production

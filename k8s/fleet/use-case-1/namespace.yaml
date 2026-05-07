@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: team-a-demo
+  labels:
+    app.kubernetes.io/part-of: fleet-manager-demo
+    fleet-demo.azure.com/use-case: namespace-placement

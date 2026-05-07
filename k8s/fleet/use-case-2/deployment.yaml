@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  namespace: intelligent-demo
+  labels:
+    app.kubernetes.io/name: intelligent-demo
+    fleet-demo.azure.com/use-case: intelligent-placement
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: intelligent-nginx
+  template:
+    metadata:
+      labels:
+        app: intelligent-nginx
+        fleet-demo.azure.com/use-case: intelligent-placement
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.25.5
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 250m
+              memory: 256Mi

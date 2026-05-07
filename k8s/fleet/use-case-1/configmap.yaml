@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-team-settings
+  namespace: team-a-demo
+  labels:
+    app.kubernetes.io/name: team-a-demo
+    fleet-demo.azure.com/component: app-config
+    fleet-demo.azure.com/use-case: namespace-placement
+data:
+  FEATURE_FLAG_EXPERIMENT: enabled
+  MESSAGE: Managed by Git on the hub and distributed with ResourcePlacement.
+  RELEASE_RING: staging-canary

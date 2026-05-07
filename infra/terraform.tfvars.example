@@ -1,0 +1,15 @@
+subscription_id = "00000000-0000-0000-0000-000000000000"
+location        = "eastus2"
+name_prefix     = "fleetdemo"
+
+# Set this to a supported, non-latest AKS version if you want a richer upgrade demo.
+# kubernetes_version = "1.31.9"
+
+member_node_vm_size = "Standard_B2ms"
+member_node_count   = 1
+hub_vm_size         = "Standard_D2s_v3"
+stage_wait_seconds  = 120
+
+tags = {
+  owner = "your-name"
+}

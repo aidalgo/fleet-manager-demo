@@ -1,0 +1,11 @@
+# Template manifest for the staged rollout run.
+# For Azure Fleet external rollout, omit resourceSnapshotIndex on the first run so
+# the controller creates the latest resource snapshot automatically.
+apiVersion: placement.kubernetes-fleet.io/v1beta1
+kind: ClusterStagedUpdateRun
+metadata:
+  name: guestbook-rollout-run
+spec:
+  placementName: guestbook-crp
+  stagedRolloutStrategyName: guestbook-rollout
+  state: Run

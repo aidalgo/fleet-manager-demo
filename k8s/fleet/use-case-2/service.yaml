@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+  namespace: intelligent-demo
+  labels:
+    app.kubernetes.io/name: intelligent-demo
+    fleet-demo.azure.com/use-case: intelligent-placement
+spec:
+  selector:
+    app: intelligent-nginx
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP

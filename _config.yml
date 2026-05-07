@@ -1,0 +1,32 @@
+title: Azure Fleet Manager Demo
+description: Argo-first GitOps workshops for Azure Kubernetes Fleet Manager.
+remote_theme: just-the-docs/just-the-docs
+plugins:
+  - jekyll-remote-theme
+  - jekyll-seo-tag
+  - jekyll-include-cache
+
+# Update this if the repository name changes or if the site is published at a custom path.
+baseurl: "/fleet-manager-demo"
+url: ""
+
+permalink: pretty
+search_enabled: true
+heading_anchors: true
+nav_sort: case_insensitive
+back_to_top: true
+back_to_top_text: "Back to top"
+footer_content: "Workshop content for Azure Kubernetes Fleet Manager, GitOps, placement, governance, and fleet operations."
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+
+exclude:
+  - vendor/
+  - node_modules/
+  - .bundle/
+  - .sass-cache/
+  - .jekyll-cache/

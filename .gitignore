@@ -1,0 +1,52 @@
+# macOS and editor artifacts
+.DS_Store
+.AppleDouble
+.LSOverride
+*.swp
+*.swo
+*~
+
+# Local environment files
+.env
+.env.*
+!.env.example
+*.local
+
+# Kubernetes and local cluster access
+.kube/
+*.kubeconfig
+
+# Azure local tooling state
+.azure/
+
+# Terraform working directories and local-only inputs
+.terraform/
+**/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+*.tfplan.*
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+terraform.tfvars
+terraform.tfvars.json
+*.auto.tfvars
+*.auto.tfvars.json
+.terraform.tfstate.lock.info
+
+# Jekyll, Bundler, and local site preview output
+.bundle/
+vendor/bundle/
+vendor/cache/
+_site/
+.jekyll-cache/
+.jekyll-metadata
+.sass-cache/
+
+# Generic caches and temporary directories
+.cache/
+tmp/

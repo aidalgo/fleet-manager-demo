@@ -1,0 +1,42 @@
+apiVersion: placement.kubernetes-fleet.io/v1
+kind: ClusterResourcePlacement
+metadata:
+  name: intelligent-demo-crp
+spec:
+  resourceSelectors:
+    - group: ""
+      kind: Namespace
+      name: intelligent-demo
+      version: v1
+  policy:
+    placementType: PickN
+    numberOfClusters: 2
+    affinity:
+      clusterAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          clusterSelectorTerms:
+            - labelSelector:
+                matchExpressions:
+                  - key: fleet.azure.com/group
+                    operator: In
+                    values:
+                      - staging
+                      - canary
+                      - production
+        preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 60
+            preference:
+              labelSelector:
+                matchLabels:
+                  fleet.azure.com/group: canary
+              propertySorter:
+                name: kubernetes-fleet.io/node-count
+                sortOrder: Descending
+          - weight: 40
+            preference:
+              labelSelector:
+                matchLabels:
+                  fleet.azure.com/group: production
+              propertySorter:
+                name: kubernetes-fleet.io/node-count
+                sortOrder: Descending
