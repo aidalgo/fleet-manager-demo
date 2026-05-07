@@ -28,7 +28,6 @@ which member clusters should receive it.
 - `k8s/fleet/use-case-2/service.yaml`
 - `k8s/fleet/use-case-2/deployment.yaml`
 - `k8s/fleet/use-case-2/crp-pickn.yaml`
-- `scripts/apply-intelligent-placement.sh`
 
 ## What this workshop demonstrates
 
@@ -178,23 +177,35 @@ Expected result:
 If cluster properties tie or member availability changes, trust the CRP status
 on the hub to explain the final scheduling result.
 
-## 6. Optional fast replay path
+## 6. How this maps to a GitOps flow
 
-Once you have walked the manual sequence once, you can rerun the same demo with
-the helper script:
+For a GitOps workflow, keep the hub-side manifests in Git and let Argo CD sync
+them to the Fleet hub.
 
-```bash
-./scripts/apply-intelligent-placement.sh apply
-```
+The starting point in this repo is `k8s/fleet/use-case-2/`.
 
-That helper performs the same hub-side apply sequence in order:
+The simplest first step is to create an Argo CD `Application` that targets
+`k8s/fleet/use-case-2/` and syncs that folder to the Fleet hub context.
 
-- apply the namespace
-- apply the Service and Deployment
-- apply the `PickN` placement CRP
+In that model:
 
-If you want the GitOps version of the same demo, point Argo CD at
-`k8s/fleet/use-case-2/` and sync that folder to the Fleet hub.
+- Argo CD owns the desired state on the Fleet hub
+- Fleet evaluates the `PickN` placement policy on the hub
+- Fleet selects two member clusters from the eligible set
+- Fleet propagates the namespace and workload only to the selected clusters
+
+That means Argo CD is the writer to the hub, while Fleet remains responsible
+for scheduling and multi-cluster distribution.
+
+This scenario maps more directly to GitOps than the namespace-governance
+scenario because the namespace, workload, and placement policy all live in one
+folder and do not depend on a separate wait step across member clusters.
+
+To make the GitOps path in this repo stronger, consider these improvements:
+
+- separate the staged workload manifests from the placement policy if different teams should own them in Git
+- add Argo CD sync-wave annotations if you want the namespace to be applied ahead of the namespace-scoped workload more explicitly
+- add a small Argo CD example `Application` manifest for this scenario so the GitOps entry point is visible in the repo
 
 ## 7. Reset the scenario
 

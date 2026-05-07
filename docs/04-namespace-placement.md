@@ -252,29 +252,44 @@ kubectl --context member-canary -n team-a-demo get resourcequota,limitrange,netw
 kubectl --context member-production -n team-a-demo get resourcequota,limitrange,networkpolicy,configmap
 ```
 
-## 11. Optional GitOps replay path
+## 11. How this maps to a GitOps flow
 
-Once you have walked through the manual sequence once, you can demo the same
-scenario in a faster way:
+For a GitOps workflow, keep the hub-side manifests in Git and let Argo CD sync
+them to the Fleet hub.
 
-```bash
-./scripts/apply-namespace-placement.sh apply
-```
+The starting point in this repo is `k8s/fleet/use-case-1/`.
 
-That helper performs the same flow in the correct order:
+The simplest first step is to create an Argo CD `Application` that targets
+`k8s/fleet/use-case-1/` and syncs that folder to the Fleet hub context.
 
-- apply namespace and namespace CRP
-- wait for the namespace to appear on all member clusters
-- apply the governance baseline and its `ResourcePlacement`
-- apply the ConfigMap and app-team `ResourcePlacement`
+In that model:
 
-If you want the GitOps version of the same demo, point Argo CD at
-`k8s/fleet/use-case-1/` and sync that folder to the Fleet hub.
+- Argo CD owns the desired state on the Fleet hub
+- Fleet still creates the namespace boundary on the member clusters
+- Fleet still distributes the governance baseline to all three clusters
+- Fleet still distributes the app-team ConfigMap only to `staging` and `canary`
+
+That means Argo CD is the writer to the hub, while Fleet remains responsible
+for multi-cluster distribution and policy enforcement.
+
+Important: this walkthrough applies the namespace first, confirms that it has
+been created on each member cluster, and only then applies the namespace-
+scoped placements. The current `k8s/fleet/use-case-1/kustomization.yaml`
+collects the same manifests, but it does not encode that dependency by itself.
+
+To make the GitOps path in this repo stronger, consider these improvements:
+
+- split the scenario into two folders or two Argo CD Applications: one for the namespace plus `ClusterResourcePlacement`, and one for the governance and app-team resources
+- add Argo CD sync-wave annotations so namespace setup happens before the namespace-scoped placements
+- keep platform-owned manifests and app-team manifests in separate folders so ownership stays clear in Git
+
+Those changes would make the GitOps path easier to understand and closer to the
+manual walkthrough order.
 
 ## 12. Reset the scenario
 
-If you want to rerun the workshop from the beginning, clear the hub-side and
-member-side resources:
+To rerun the scenario from the beginning, clear the hub-side and member-side
+resources:
 
 ```bash
 ./scripts/apply-namespace-placement.sh delete
@@ -293,4 +308,4 @@ This removes:
 ## Implementation notes
 
 - Reuse the built-in Fleet group labels rather than attempting to relabel `MemberCluster` objects directly.
-- Keep Argo as the GitOps writer to the hub when you want the GitOps path. Fleet remains responsible for distributing the namespace, the governance baseline, and the selected app resources across clusters.
+- Keep Argo as the GitOps writer to the hub for this pattern. Fleet remains responsible for distributing the namespace, the governance baseline, and the selected app resources across clusters.
