@@ -23,7 +23,6 @@ which member clusters should receive it.
 
 ## Repo assets used by this scenario
 
-- `k8s/fleet/use-case-2/kustomization.yaml`
 - `k8s/fleet/use-case-2/namespace.yaml`
 - `k8s/fleet/use-case-2/service.yaml`
 - `k8s/fleet/use-case-2/deployment.yaml`
