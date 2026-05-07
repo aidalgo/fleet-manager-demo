@@ -1,20 +1,20 @@
 ---
 title: 05. Intelligent Placement
 nav_order: 50
-description: Show how Fleet chooses member clusters using PickN, affinity, and property sorting.
+description: Use PickN, affinity, and property sorting to see how Fleet chooses member clusters for a workload.
 permalink: /scenarios/intelligent-placement/
 ---
 
 Status: Available
 
-This is the guided workshop version of intelligent placement. It demonstrates
-Fleet's scheduling value beyond simple staged rollout and is meant to be run as
-a live demo, not treated as a capability summary.
+This guide focuses on scheduling decisions. It shows how Fleet can place one
+workload from the hub onto a selected subset of member clusters instead of
+broadcasting it everywhere.
 
 Argo CD can still stage the desired workload on the hub, but this walkthrough
-starts with direct `kubectl apply` steps so you can show the scheduling decision
-clearly. The core story is simple: the workload exists once on the hub, and
-Fleet decides which member clusters should receive it.
+starts with direct `kubectl apply` steps so you can inspect the scheduling
+decision directly. The workload exists once on the hub, and Fleet decides
+which member clusters should receive it.
 
 ## Shared prerequisites
 

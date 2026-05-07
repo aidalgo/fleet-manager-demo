@@ -1,24 +1,23 @@
 ---
 title: 04. Namespace Placement and Governance
 nav_order: 40
-description: Demonstrate GitOps namespace governance with ClusterResourcePlacement and ResourcePlacement.
+description: Use ClusterResourcePlacement and ResourcePlacement to distribute namespaces, governance resources, and app config across the fleet.
 permalink: /scenarios/namespace-governance/
 ---
 
 Status: Available
 
-This is the guided workshop version of namespace placement. It is the closest
-GitOps-native expansion of the baseline rollout and is meant to be run as a
-demo, not just read as a capability summary.
+This guide uses namespace placement to show how platform and application
+responsibilities can be separated across the fleet.
 
-It shows a clear split of responsibilities:
+It follows a clear split of responsibilities:
 
 - the platform admin establishes the namespace boundary and governance baseline across the fleet
 - the application team places namespace-scoped resources inside that boundary
 
 Argo CD can still own the desired state staged on the hub, but this walkthrough
-uses direct `kubectl apply` steps first so the platform-versus-app split is easy
-to demonstrate live.
+starts with direct `kubectl apply` steps so you can inspect the Fleet objects
+and results directly.
 
 ## Shared prerequisites
 

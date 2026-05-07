@@ -62,21 +62,19 @@ Terraform.
 
 ## 4. Choose the workshop track you want to run next
 
-At this point, the shared platform setup is complete. Use the track that best
-matches the story you want to tell:
+At this point, the shared platform setup is complete. Continue with the
+scenario that matches what you want to run next:
 
-- If you want the recommended opening scenario, continue to
-  `docs/03-update-orchestration.md`.
-- If you want the GitOps governance path, continue to
-  `docs/04-namespace-placement.md`. You can reuse the same Argo bootstrap
-  pattern later if you want to show the GitOps version.
-- If you want the Fleet scheduling story, continue to
-  `docs/05-intelligent-placement.md`.
-- If you want the Azure-managed namespace-governance story, continue to
-  `docs/06-managed-fleet-namespaces.md`. That track does not require Argo CD.
-- If you want the advanced Argo-plus-Fleet closing scenario, continue to
-  `docs/07-baseline-app-rollout.md` and run `./scripts/bootstrap-argocd.sh`
-  when that guide tells you to.
+- Continue to `docs/03-update-orchestration.md` for staged AKS updates and
+  approval-gated rollout.
+- Continue to `docs/04-namespace-placement.md` for namespace placement and
+  governance.
+- Continue to `docs/05-intelligent-placement.md` for PickN scheduling and
+  cluster selection.
+- Continue to `docs/06-managed-fleet-namespaces.md` for Azure-managed
+  multi-cluster namespaces.
+- Continue to `docs/07-baseline-app-rollout.md` and run
+  `./scripts/bootstrap-argocd.sh` for the Argo CD rollout scenario.
 
 ## 5. Verify hub access
 

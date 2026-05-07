@@ -1,7 +1,7 @@
 ---
 title: 06. Managed Fleet Namespaces
 nav_order: 60
-description: Walk through Azure-managed multi-cluster namespaces, policies, and scoped credentials.
+description: Create Azure-managed multi-cluster namespaces with quota, network policy, and scoped credentials.
 permalink: /scenarios/managed-fleet-namespaces/
 ---
 
@@ -9,17 +9,14 @@ Status: Available
 
 Preview feature.
 
-This is the guided workshop version of managed fleet namespaces. It is the
-platform-governance track for the repo and is meant to be run as a live demo,
-not just read as a feature overview.
+This guide uses Managed Fleet Namespaces to create and govern one namespace
+across multiple member clusters from Azure Fleet.
 
-It shows how Fleet can manage multi-cluster namespaces with quotas, default
-network-policy posture, adoption behavior, delete behavior, and namespace-
-scoped access.
+It covers quotas, default network-policy posture, adoption behavior, delete
+behavior, and namespace-scoped access.
 
-This scenario complements the Argo-first model instead of replacing it. Argo can
-still deploy workloads into the governed namespace later, while Fleet controls
-how that namespace exists and is governed across clusters.
+Argo CD is optional here. The namespace is managed by Fleet itself, and
+workloads can be added later.
 
 ## Shared prerequisites
 

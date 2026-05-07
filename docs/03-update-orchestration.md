@@ -1,20 +1,20 @@
 ---
 title: 03. AKS Update Orchestration
 nav_order: 30
-description: Start the workshop with staged AKS updates through Fleet strategies, approval gates, and auto-upgrade profiles.
+description: Run staged AKS updates through Fleet strategies, approval gates, and auto-upgrade profiles.
 permalink: /operations/update-orchestration/
 ---
 
 Status: Available for staged node-image updates with a canary-to-production
 approval gate. Auto-upgrade profiles are also included as a hands-on extension.
 
-This is the opening scenario after the shared setup steps. It introduces Azure
-Kubernetes Fleet Manager through a native fleet-operations workflow before the
-later GitOps examples.
+This guide uses Azure Kubernetes Fleet Manager to roll out AKS updates across
+the `staging`, `canary`, and `production` clusters.
 
-Unlike the Argo delivery scenario, this guide operates directly against AKS
-member clusters through Azure Fleet update strategies, update runs, and
+It covers Fleet update strategies, update runs, approval gates, and
 auto-upgrade profiles.
+
+Argo CD is not required for this scenario.
 
 ## Shared prerequisites
 

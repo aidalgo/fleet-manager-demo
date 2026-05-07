@@ -11,9 +11,9 @@ permalink: /
   <p class="site-eyebrow">Azure Kubernetes Fleet Manager Workshop</p>
   <h1>Fleet Manager for GitOps delivery and fleet-wide operations</h1>
   <p class="site-hero-copy">
-    Start with Fleet-native operations to understand the core control plane,
-    then move through placement and governance scenarios, and finish with an
-    advanced Argo CD example where Fleet still controls multi-cluster rollout.
+    Provision the shared environment, run staged AKS updates, explore
+    placement and governance scenarios, and finish with a GitOps rollout that
+    combines Argo CD with Azure Kubernetes Fleet Manager.
   </p>
   <div class="site-sequence" aria-label="Recommended workshop sequence">
     <span class="site-sequence-step">01 Setup</span>
@@ -58,13 +58,13 @@ permalink: /
 
 ## Workshop Tracks
 
-<p class="site-section-intro">After steps 01 and 02, start with step 03 to explain Fleet in a native operations flow, move through steps 04 through 06 for focused capabilities, and close with step 07 as the advanced GitOps example.</p>
+<p class="site-section-intro">After steps 01 and 02, continue to step 03 for staged AKS updates. Then run steps 04 through 06 for placement and governance scenarios. Finish with step 07 for the GitOps rollout with Argo CD.</p>
 
 <div class="site-card-grid site-card-grid--wide">
   <a class="site-card" href="{{ '/operations/update-orchestration/' | relative_url }}">
     <span class="site-card-kicker">Step 03 · Fleet operations</span>
     <strong>AKS update orchestration</strong>
-    <span>Start with staged updates, approval gates, and auto-upgrade profiles to explain Fleet in its most direct operating model.</span>
+    <span>Run staged updates, approval gates, and auto-upgrade profiles across the fleet.</span>
   </a>
   <a class="site-card" href="{{ '/scenarios/namespace-governance/' | relative_url }}">
     <span class="site-card-kicker">Step 04 · GitOps governance</span>
@@ -82,9 +82,9 @@ permalink: /
     <span>Walk through the Azure control-plane model for multi-cluster namespace governance and scoped credentials.</span>
   </a>
   <a class="site-card" href="{{ '/reference/baseline-app-rollout/' | relative_url }}">
-    <span class="site-card-kicker">Step 07 · Advanced GitOps</span>
+    <span class="site-card-kicker">Step 07 · GitOps rollout</span>
     <strong>Baseline Argo app rollout</strong>
-    <span>Finish with the full GitOps flow where Argo reconciles the app and Fleet controls cross-cluster rollout and promotion.</span>
+    <span>Run the GitOps rollout where Argo CD reconciles the application and Fleet controls cross-cluster placement and promotion.</span>
   </a>
 </div>
 
@@ -101,17 +101,17 @@ permalink: /
 ## Recommended Flow
 
 1. Run 01 and 02 to provision the shared environment and prepare Fleet hub access.
-2. Run 03 first to explain Fleet through staged AKS updates, approval gates, and reusable strategies.
-3. Choose one or more of 04, 05, or 06 depending on whether you want to demo governance, scheduling, or managed namespaces.
-4. Finish with 07 to show how those same Fleet concepts apply in an advanced Argo-driven GitOps flow.
+2. Run 03 for staged AKS updates, approval gates, and reusable update strategies.
+3. Run one or more of 04, 05, or 06 for namespace governance, intelligent placement, or managed fleet namespaces.
+4. Run 07 for the GitOps rollout with Argo CD and Fleet.
 5. Finish with 08 to clean up the environment.
 
-## Workshop Notes
+## Important Details
 
-- Step 03 is the best opening scenario when you want to explain Fleet without introducing GitOps tooling first.
-- The placement and governance scenarios are optimized for an Argo-friendly GitOps model.
-- Step 07 is the advanced example that shows Fleet complementing Argo CD instead of replacing it.
-- Managed Fleet Namespaces remain a preview Azure control-plane feature.
+- Step 03 works directly against the AKS member clusters and does not require Argo CD.
+- Steps 04 and 05 use hub-side placement policies to distribute namespaces, governance resources, and workloads across the fleet.
+- Step 06 uses Managed Fleet Namespaces, which is currently a preview Azure feature.
+- Step 07 adds Argo CD and uses the same staging, canary, and production model for application rollout.
 - DNS-based load balancing is intentionally deferred for a later expansion.
 
 <!-- markdownlint-enable MD033 -->
