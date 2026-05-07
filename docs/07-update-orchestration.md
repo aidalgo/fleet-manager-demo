@@ -97,7 +97,7 @@ Expected strategy behavior:
 - the strategy contains three stages: `staging`, `canary`, and `production`
 - `maxConcurrency` is set to `1` at both the stage and group levels for a safe rollout
 - a pause is configured between earlier stages
-- the `canary` stage creates an approval gate before `production` can start
+- the `production` stage defines a `beforeGate`, so approval is requested immediately before production starts
 
 This is the reusable policy that both manual update runs and auto-upgrade
 profiles will follow.
@@ -162,7 +162,7 @@ For this workshop, use the Azure portal approval flow:
 1. Open the Fleet Manager resource in the Azure portal.
 2. Go to Multi-cluster update.
 3. Open the `node-image-demo` run.
-4. Find the pending gate after `canary`.
+4. Find the pending gate before `production` starts.
 5. Approve the gate named `Approve production rollout`.
 
 This is the human promotion step in the rollout. It is where an operator checks
@@ -234,7 +234,6 @@ az fleet autoupgradeprofile create \
   --fleet-name "$FLEET" \
   --name node-image-channel \
   --channel NodeImage \
-  --node-image-selection Consistent \
   --update-strategy-id "$UPDATE_STRATEGY_ID"
 ```
 
@@ -243,7 +242,9 @@ What this does:
 - creates a recurring auto-upgrade profile named `node-image-channel`
 - tells Fleet to react to future node image releases
 - reuses the same staged rollout strategy, including the approval gate
-- uses `Consistent` node image selection so later stages reuse the image version already exercised earlier in the run
+
+For the `NodeImage` channel, do not pass `--node-image-selection`.
+The Azure CLI rejects that combination.
 
 ## 12. Generate an on-demand run from the auto-upgrade profile
 

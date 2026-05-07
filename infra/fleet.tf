@@ -78,14 +78,14 @@ resource "azapi_resource" "upgrade_strategy" {
             ]
             maxConcurrency = "1"
             name           = "canary"
-            afterGates = [
+          },
+          {
+            beforeGates = [
               {
                 displayName = "Approve production rollout"
                 type        = "Approval"
               },
             ]
-          },
-          {
             groups = [
               {
                 maxConcurrency = "1"
