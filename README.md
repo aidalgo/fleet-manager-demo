@@ -1,9 +1,16 @@
 # Azure AKS Fleet Manager GitOps Demo
 
-This repository scaffolds an Argo-first Azure Kubernetes Fleet Manager demo.
-Argo CD remains the GitOps delivery engine for workload manifests staged on the
-Fleet hub. Fleet adds multi-cluster placement, promotion, governance, and AKS
-fleet operations on top of that model.
+This repository shows how Azure Kubernetes Fleet Manager works as a
+multi-cluster control plane for both GitOps delivery and fleet-wide AKS
+operations.
+
+The reference application flow uses Argo CD as the GitOps engine. Azure
+Kubernetes Fleet Manager handles the multi-cluster concerns around that flow:
+placement, staged promotion, governance, and update orchestration across
+`staging`, `canary`, and `production` clusters.
+
+The rest of the guides then break those capabilities into focused scenarios so
+you can explain Fleet on its own terms without losing the GitOps context.
 
 ## Docs site
 
@@ -23,13 +30,18 @@ Then open `http://127.0.0.1:4000/fleet-manager-demo/`.
 If the repository name changes, update `baseurl` in `_config.yml` before
 publishing.
 
-## Current focus
+## What this repo demonstrates
+
+This workshop is organized to show two complementary ideas:
+
+- how Fleet Manager solves multi-cluster rollout, targeting, governance, and day-2 operations
+- how those same Fleet capabilities can sit underneath a GitOps workflow, with Argo CD as one practical reconciler
 
 | Guide | Capability | Status | Argo role | Notes |
 | --- | --- | --- | --- | --- |
 | `docs/01-infrastructure-setup.md` | Shared infrastructure setup | Available | None | Applies to every scenario |
 | `docs/02-hub-bootstrap.md` | Shared hub bootstrap | Available | Optional | Shared kubeconfig and Fleet label checks |
-| `docs/03-baseline-app-rollout.md` | Baseline Argo staged rollout | Available | Required | Reference pattern for app delivery |
+| `docs/03-baseline-app-rollout.md` | Baseline Argo staged rollout | Available | Required | Reference GitOps pattern where Argo reconciles the app and Fleet controls promotion |
 | `docs/04-namespace-placement.md` | GitOps namespace governance plus `ResourcePlacement` | Available | Optional | Namespace and governance pack on all clusters, app config only on staging and canary |
 | `docs/05-intelligent-placement.md` | Intelligent placement | Available | Optional | `PickN` with weighted preference for `canary` and `production` |
 | `docs/06-managed-fleet-namespaces.md` | Managed Fleet Namespaces | Available (Preview) | Complementary | Scripted Fleet managed-namespace lifecycle |
@@ -65,12 +77,13 @@ Cleanup:
 
 - `docs/08-cleanup.md`
 
-The baseline rollout guide remains the current reference implementation for Argo
-plus Fleet delivery. The namespace placement and intelligent placement guides
-now include concrete Fleet manifest sets that are also Argo-sync friendly via
-their `kustomization.yaml` files. The managed namespaces guide now includes a
-concrete Fleet CLI workflow, and the update orchestration guide remains the
-separate fleet-operations track.
+The baseline rollout guide is the reference GitOps story in the repo: Argo CD
+reconciles the application, while Fleet determines where that GitOps payload is
+staged and how it moves through environments. The namespace placement and
+intelligent placement guides then isolate those Fleet targeting behaviors in a
+way that still fits Argo-managed manifests. The managed namespaces guide covers
+the Azure-managed governance path, and the update orchestration guide shows the
+separate day-2 fleet-operations story.
 
 ## Repository layout
 
@@ -91,7 +104,7 @@ separate fleet-operations track.
 
 ## Quick start
 
-For the current Argo delivery reference flow:
+For the end-to-end GitOps reference flow:
 
 1. Follow `docs/01-infrastructure-setup.md`.
 1. Follow `docs/02-hub-bootstrap.md`.

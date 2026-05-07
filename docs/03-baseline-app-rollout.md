@@ -1,22 +1,29 @@
 ---
 title: 03. Baseline Argo App Rollout
 nav_order: 30
-description: Run the reference Argo-first rollout flow that the other Fleet scenarios build on.
+description: Run the reference GitOps rollout where Argo CD reconciles the app and Fleet controls multi-cluster promotion.
 permalink: /reference/baseline-app-rollout/
 ---
 
 Status: Available
 
-This is the current reference implementation for Argo-first application delivery
-in the repo. It keeps the KubeFleet tutorial shape but simplifies the app flow:
+This is the reference GitOps scenario in the repo. It shows how Azure
+Kubernetes Fleet Manager fits alongside Argo CD rather than replacing it:
+
+- Argo CD is the GitOps reconciler that applies the desired app state.
+- Fleet stages that GitOps resource set on the hub, selects the member
+  clusters, and controls how promotion moves from `staging` to `canary` to
+  `production`.
+
+It keeps the KubeFleet tutorial shape but simplifies the app flow:
 
 - the Argo CD `Application` is staged in the standard `argocd` namespace
 - the built-in `default` Argo CD project is used
 - the sample app comes from `argoproj/argocd-example-apps`
 
-Use this guide when you want the current end-to-end Argo plus Fleet rollout.
-Use it as the reference pattern for the namespace placement and intelligent
-placement guides.
+Use this guide when you want the clearest end-to-end example of Fleet applied
+to a GitOps operating model. Use it as the reference pattern for the namespace
+placement and intelligent placement guides.
 
 ## Shared prerequisites
 

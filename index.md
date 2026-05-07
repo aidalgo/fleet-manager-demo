@@ -1,7 +1,7 @@
 ---
 title: Workshop Home
 nav_order: 1
-description: Azure Kubernetes Fleet Manager workshop hub for setup, GitOps scenarios, and fleet operations.
+description: Azure Kubernetes Fleet Manager workshop hub showing how Fleet fits GitOps delivery, multi-cluster governance, and fleet-wide AKS operations.
 permalink: /
 ---
 
@@ -9,10 +9,12 @@ permalink: /
 
 <div class="site-hero">
   <p class="site-eyebrow">Azure Kubernetes Fleet Manager Workshop</p>
-  <h1>Argo-first GitOps, multi-cluster governance, and fleet operations</h1>
+  <h1>Fleet Manager for GitOps delivery and fleet-wide operations</h1>
   <p class="site-hero-copy">
-    Follow a workshop-style path that starts with shared setup, moves through
-    delivery and placement scenarios, and finishes with fleet-wide operations.
+    This workshop shows where Azure Kubernetes Fleet Manager fits in a real
+    operating model: Argo CD is the GitOps reconciler in the reference flow,
+    while Fleet handles multi-cluster placement, staged promotion, governance,
+    and AKS update orchestration.
   </p>
   <div class="site-sequence" aria-label="Recommended workshop sequence">
     <span class="site-sequence-step">01 Setup</span>
@@ -55,13 +57,13 @@ permalink: /
 
 ## Workshop Tracks
 
-<p class="site-section-intro">After steps 01 and 02, run step 03 once, then choose one or more of steps 04 through 07 depending on the story you want to tell.</p>
+<p class="site-section-intro">After steps 01 and 02, run step 03 once to establish the GitOps reference pattern, then choose one or more of steps 04 through 07 to focus on specific Fleet capabilities.</p>
 
 <div class="site-card-grid site-card-grid--wide">
   <a class="site-card" href="{{ '/reference/baseline-app-rollout/' | relative_url }}">
     <span class="site-card-kicker">Step 03 · Reference</span>
     <strong>Baseline Argo app rollout</strong>
-    <span>Start with the canonical Argo plus Fleet delivery flow before moving into focused Fleet scenarios.</span>
+    <span>Start with the reference GitOps flow where Argo reconciles the app and Fleet controls cross-cluster rollout and promotion.</span>
   </a>
   <a class="site-card" href="{{ '/scenarios/namespace-governance/' | relative_url }}">
     <span class="site-card-kicker">Step 04 · GitOps governance</span>
@@ -104,7 +106,8 @@ permalink: /
 
 ## Workshop Notes
 
-- The placement and governance scenarios are optimized for an Argo-first GitOps model.
+- The baseline scenario is the clearest example of how Fleet complements a GitOps tool instead of replacing it.
+- The placement and governance scenarios are optimized for an Argo-friendly GitOps model.
 - Managed Fleet Namespaces remain a preview Azure control-plane feature.
 - The update orchestration track is the strongest day-2 operations story in the repo.
 - DNS-based load balancing is intentionally deferred for a later expansion.
