@@ -14,7 +14,7 @@ Start by removing the scenario-specific resources before you destroy the shared
 infrastructure. Choose only the cleanup commands that match the scenarios you
 ran.
 
-- If you ran `docs/03-baseline-app-rollout.md`, reset the propagated guestbook resources before destroying the infrastructure:
+- If you ran `docs/07-baseline-app-rollout.md`, reset the propagated guestbook resources before destroying the infrastructure:
 
 ```bash
 bash scripts/clear-app-rollout.sh

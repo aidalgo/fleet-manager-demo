@@ -65,9 +65,8 @@ Terraform.
 At this point, the shared platform setup is complete. Use the track that best
 matches the story you want to tell:
 
-- If you want the full Argo-first reference flow, continue to
-  `docs/03-baseline-app-rollout.md` and run `./scripts/bootstrap-argocd.sh`
-  when that guide tells you to.
+- If you want the recommended opening scenario, continue to
+  `docs/03-update-orchestration.md`.
 - If you want the GitOps governance path, continue to
   `docs/04-namespace-placement.md`. You can reuse the same Argo bootstrap
   pattern later if you want to show the GitOps version.
@@ -75,8 +74,9 @@ matches the story you want to tell:
   `docs/05-intelligent-placement.md`.
 - If you want the Azure-managed namespace-governance story, continue to
   `docs/06-managed-fleet-namespaces.md`. That track does not require Argo CD.
-- If you want the day-2 operations story, continue to
-  `docs/07-update-orchestration.md`. That track also does not require Argo CD.
+- If you want the advanced Argo-plus-Fleet closing scenario, continue to
+  `docs/07-baseline-app-rollout.md` and run `./scripts/bootstrap-argocd.sh`
+  when that guide tells you to.
 
 ## 5. Verify hub access
 

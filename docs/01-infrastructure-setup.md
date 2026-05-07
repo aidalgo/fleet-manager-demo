@@ -78,15 +78,17 @@ before moving on. The next guides assume the shared environment already exists.
 
 - Continue to `docs/02-hub-bootstrap.md` next. That page prepares hub access,
   kubeconfigs, and member-cluster checks for every workshop track.
-- After `docs/02-hub-bootstrap.md`, use `docs/03-baseline-app-rollout.md` if
-  you want the full Argo-first reference flow.
+- After `docs/02-hub-bootstrap.md`, start with
+  `docs/03-update-orchestration.md` if you want the recommended Fleet-first
+  workshop flow.
 - After `docs/02-hub-bootstrap.md`, use `docs/04-namespace-placement.md` or
   `docs/05-intelligent-placement.md` if you want a Fleet placement workshop.
 - After `docs/02-hub-bootstrap.md`, use
   `docs/06-managed-fleet-namespaces.md` if you want the Azure-managed
   namespace-governance path.
 - After `docs/02-hub-bootstrap.md`, use
-  `docs/07-update-orchestration.md` if you want the fleet-operations track.
+  `docs/07-baseline-app-rollout.md` if you want to close with the advanced
+  Argo-plus-Fleet delivery example.
 
 ## Notes
 

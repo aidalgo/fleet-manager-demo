@@ -9,8 +9,9 @@ Kubernetes Fleet Manager handles the multi-cluster concerns around that flow:
 placement, staged promotion, governance, and update orchestration across
 `staging`, `canary`, and `production` clusters.
 
-The rest of the guides then break those capabilities into focused scenarios so
-you can explain Fleet on its own terms without losing the GitOps context.
+The workshop now starts with Fleet-native operations so you can explain Fleet
+directly, then moves through focused placement and governance scenarios, and
+closes with the Argo CD example as the most advanced GitOps story in the repo.
 
 ## Docs site
 
@@ -41,11 +42,11 @@ This workshop is organized to show two complementary ideas:
 | --- | --- | --- | --- | --- |
 | `docs/01-infrastructure-setup.md` | Shared infrastructure setup | Available | None | Applies to every scenario |
 | `docs/02-hub-bootstrap.md` | Shared hub bootstrap | Available | Optional | Shared kubeconfig and Fleet label checks |
-| `docs/03-baseline-app-rollout.md` | Baseline Argo staged rollout | Available | Required | Reference GitOps pattern where Argo reconciles the app and Fleet controls promotion |
+| `docs/03-update-orchestration.md` | AKS update orchestration | Available | Not required | Recommended opening scenario for the workshop story |
 | `docs/04-namespace-placement.md` | GitOps namespace governance plus `ResourcePlacement` | Available | Optional | Namespace and governance pack on all clusters, app config only on staging and canary |
 | `docs/05-intelligent-placement.md` | Intelligent placement | Available | Optional | `PickN` with weighted preference for `canary` and `production` |
 | `docs/06-managed-fleet-namespaces.md` | Managed Fleet Namespaces | Available (Preview) | Complementary | Scripted Fleet managed-namespace lifecycle |
-| `docs/07-update-orchestration.md` | AKS update orchestration | Available | Not required | Staged node-image updates with approval gate and auto-upgrade profile walkthrough |
+| `docs/07-baseline-app-rollout.md` | Baseline Argo staged rollout | Available | Required | Advanced GitOps closing example where Argo reconciles the app and Fleet controls promotion |
 | Deferred | DNS load balancing | Deferred | Complementary | Intentionally held for a later pass |
 
 ## What gets deployed
@@ -67,23 +68,21 @@ Shared setup:
 
 Scenario guides:
 
-- `docs/03-baseline-app-rollout.md`
+- `docs/03-update-orchestration.md`
 - `docs/04-namespace-placement.md`
 - `docs/05-intelligent-placement.md`
 - `docs/06-managed-fleet-namespaces.md`
-- `docs/07-update-orchestration.md`
+- `docs/07-baseline-app-rollout.md`
 
 Cleanup:
 
 - `docs/08-cleanup.md`
 
-The baseline rollout guide is the reference GitOps story in the repo: Argo CD
-reconciles the application, while Fleet determines where that GitOps payload is
-staged and how it moves through environments. The namespace placement and
-intelligent placement guides then isolate those Fleet targeting behaviors in a
-way that still fits Argo-managed manifests. The managed namespaces guide covers
-the Azure-managed governance path, and the update orchestration guide shows the
-separate day-2 fleet-operations story.
+The update orchestration guide is now the first scenario because it shows Fleet
+in its most direct operating model. The namespace placement and intelligent
+placement guides then isolate Fleet targeting behaviors, the managed namespaces
+guide covers the Azure-managed governance path, and the baseline rollout guide
+closes the workshop with the full Argo-plus-Fleet GitOps story.
 
 ## Repository layout
 
@@ -104,18 +103,15 @@ separate day-2 fleet-operations story.
 
 ## Quick start
 
-For the end-to-end GitOps reference flow:
+For the recommended Fleet-first workshop flow:
 
 1. Follow `docs/01-infrastructure-setup.md`.
 1. Follow `docs/02-hub-bootstrap.md`.
+1. Follow `docs/03-update-orchestration.md`.
+1. Follow one or more of `docs/04-namespace-placement.md`, `docs/05-intelligent-placement.md`, or `docs/06-managed-fleet-namespaces.md`.
 1. Run `scripts/bootstrap-argocd.sh`.
-1. Follow `docs/03-baseline-app-rollout.md`.
-
-For AKS fleet operations:
-
-1. Follow `docs/01-infrastructure-setup.md`.
-1. Follow `docs/02-hub-bootstrap.md`.
-1. Follow `docs/07-update-orchestration.md`.
+1. Follow `docs/07-baseline-app-rollout.md`.
+1. Follow `docs/08-cleanup.md`.
 
 For the newly added scenario helpers:
 
@@ -126,6 +122,7 @@ For the newly added scenario helpers:
 ## Deferred follow-up
 
 DNS-based load balancing remains intentionally deferred. It still fits the
-Argo-first model, but it adds preview networking and Azure Traffic Manager
-complexity. When it is added later, it should land as its own scenario guide
-instead of being mixed into the current rollout, governance, or update tracks.
+repo's GitOps-plus-Fleet model, but it adds preview networking and Azure
+Traffic Manager complexity. When it is added later, it should land as its own
+scenario guide instead of being mixed into the current rollout, governance, or
+update tracks.
